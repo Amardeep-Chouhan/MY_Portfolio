@@ -805,12 +805,22 @@ main {
 }
 
 .calendar-wrap {
-  overflow-x: auto;
   padding: 1rem 1.25rem;
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+}
+
+.calendar-wrap > article {
+  width: 100%;
+  max-width: none !important;
+}
+
+.calendar-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .calendar-note {
