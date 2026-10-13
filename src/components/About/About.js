@@ -32,7 +32,7 @@ function About() {
       <Row className="align-items-center g-4">
         <Col md={7}>
           <h1 className="page-title">
-            Know Who <span className="purple">I'm</span>
+            <span className="starlight-text">Know Who I'm</span>
           </h1>
           <AboutCard />
         </Col>
@@ -48,7 +48,7 @@ function About() {
         <Row className="g-4">
           {experience.map((item) => (
             <Col key={item.org} md={6}>
-              <article className="info-card">
+              <article className="info-card experience-card">
                 <h3>{item.role}</h3>
                 <p className="info-org">{item.org}</p>
                 <p className="muted">{item.period}</p>
@@ -56,14 +56,14 @@ function About() {
             </Col>
           ))}
           <Col md={6}>
-            <article className="info-card">
+            <article className="info-card experience-card">
               <h3>B.Tech, Information Technology (IoT)</h3>
               <p className="info-org">Madhav Institute of Technology &amp; Science, Gwalior</p>
               <p className="muted">2022 – 2026</p>
             </article>
           </Col>
           <Col md={6}>
-            <article className="info-card">
+            <article className="info-card experience-card">
               <h3>Certifications</h3>
               <ul className="info-list">
                 {certifications.map((c) => (

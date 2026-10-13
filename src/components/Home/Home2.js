@@ -9,8 +9,8 @@ function Home2() {
       <Container>
         <Row className="align-items-center g-4">
           <Col md={8}>
-            <h2 id="intro-title" className="section-title">
-              A little <span className="purple">about me</span>
+            <h2 id="intro-title" className="section-title starlight-text">
+              A little about me
             </h2>
             <p>
               I'm a full-stack developer from Bhopal who enjoys turning ideas

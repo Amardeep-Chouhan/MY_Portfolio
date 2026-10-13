@@ -358,6 +358,26 @@ main {
   margin-bottom: 1rem;
 }
 
+.starlight-text {
+  color: transparent;
+  background-image:
+    radial-gradient(circle at 14% 35%, var(--text) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 72% 68%, var(--accent) 0 1.5px, transparent 2px),
+    linear-gradient(100deg, var(--text), var(--accent), var(--text));
+  background-size: 120px 60px, 150px 72px, 240% 100%;
+  background-position: 0 0, 0 0, 120% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--accent) 28%, transparent));
+  animation: starlight-shimmer 3.6s linear infinite;
+}
+
+@keyframes starlight-shimmer {
+  to {
+    background-position: 120px 0, -150px 0, -120% 0;
+  }
+}
+
 .section {
   padding: var(--section-space) 0;
 }
@@ -436,7 +456,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.5rem;
+  margin-top: 1.1rem;
 }
 
 .hero-art img {
@@ -475,6 +495,39 @@ main {
   background: rgba(199, 112, 240, 0.1);
   border: 1px solid var(--border);
   border-radius: 999px;
+}
+
+.hero .chip-list .chip {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.hero .chip-list .chip::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(0deg, transparent, transparent 30%, rgba(199, 112, 240, 0.3));
+  transform: rotate(-45deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.hero .chip-list .chip:hover {
+  transform: scale(1.05);
+  border-color: var(--border-strong);
+  box-shadow: 0 0 14px rgba(199, 112, 240, 0.35);
+}
+
+.hero .chip-list .chip:hover::before {
+  opacity: 1;
+  transform: rotate(-45deg) translateY(100%);
 }
 
 .chip-list-sm {
@@ -608,6 +661,44 @@ main {
   margin-top: var(--section-space);
 }
 
+.experience-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.experience-card::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(0deg, transparent, transparent 30%, rgba(199, 112, 240, 0.3));
+  transform: rotate(-45deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.experience-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.experience-card:hover {
+  transform: scale(1.03);
+  border-color: var(--border-strong);
+  box-shadow: 0 0 20px rgba(199, 112, 240, 0.3);
+}
+
+.experience-card:hover::before {
+  opacity: 1;
+  transform: rotate(-45deg) translateY(100%);
+}
+
 .info-card {
   height: 100%;
   padding: 1.25rem 1.5rem;
@@ -649,17 +740,56 @@ main {
   align-items: center;
   gap: 0.6rem;
   min-width: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding: 0.6rem 0.9rem;
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skill::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.12) 48%, transparent 76%);
+  transform: translateX(-120%);
+  transition: transform 0.55s ease;
+}
+
+.skill:nth-child(6n + 1) { --skill-accent: #64d8cb; }
+.skill:nth-child(6n + 2) { --skill-accent: #f7bd61; }
+.skill:nth-child(6n + 3) { --skill-accent: #f17c9b; }
+.skill:nth-child(6n + 4) { --skill-accent: #83aaff; }
+.skill:nth-child(6n + 5) { --skill-accent: #a9d66f; }
+.skill:nth-child(6n) { --skill-accent: #d09aff; }
+
+.skill > * {
+  position: relative;
+  z-index: 1;
 }
 
 .skill:hover {
-  border-color: var(--border-strong);
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--skill-accent, var(--accent));
   background: var(--surface-strong);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 14px color-mix(in srgb, var(--skill-accent, var(--accent)) 24%, transparent);
+}
+
+.skill:hover::before {
+  transform: translateX(120%);
+}
+
+.skill:nth-child(3n + 2):hover {
+  transform: translateY(-5px) rotate(1deg);
+}
+
+.skill:nth-child(3n):hover {
+  transform: translateY(-3px) scale(1.03);
 }
 
 .skill-icon {
@@ -786,8 +916,28 @@ main {
   }
   .btn:hover,
   .project-card-view:hover,
-  .social-list a:hover {
+  .social-list a:hover,
+  .experience-card:hover {
     transform: none;
+  }
+  .experience-card:hover {
+    box-shadow: none;
+  }
+  .experience-card:hover::before {
+    opacity: 0;
+    transform: rotate(-45deg);
+  }
+  .starlight-text {
+    animation: none;
+    filter: none;
+  }
+  .hero .chip-list .chip:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .hero .chip-list .chip:hover::before {
+    opacity: 0;
+    transform: rotate(-45deg);
   }
 }
 #preloader {
